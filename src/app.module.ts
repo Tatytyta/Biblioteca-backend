@@ -7,29 +7,35 @@ import { GenerosModule } from './generos/generos.module';
 import { LibrosModule } from './libros/libros.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { AuthModule } from './auth/auth.module';
-import { AppService } from './app.service';
 import { AppController } from './app.controller';
-
-// ...otros imports
+import { AppService } from './app.service';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get('DB_HOST'),
-        port: configService.get('DB_PORT'),
-        username: configService.get('DB_USER'),
-        password: configService.get('DB_PASS'),
-        database: configService.get('DB_NAME'),
+        host: configService.get('DB_HOST')!,
+        port: parseInt(configService.get('DB_PORT')!),
+        username: configService.get('DB_USER')!,
+        password: configService.get('DB_PASS')!,
+        database: configService.get('DB_NAME')!,
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
         ssl: {
           rejectUnauthorized: false,
         },
+        extra: {
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        },
+        logging: true,
       }),
     }),
     PrestamosModule,
@@ -38,9 +44,7 @@ import { AppController } from './app.controller';
     LibrosModule,
     UsuariosModule,
     AuthModule,
-
   ],
-
   controllers: [AppController],
   providers: [AppService],
 })
