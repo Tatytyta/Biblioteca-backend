@@ -37,21 +37,21 @@ export class UsuariosController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: number) {
     const user = await this.usersService.findOne(id);
     if (!user) throw new NotFoundException('User not found');
     return new SuccessResponseDto('User retrieved successfully', user);
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() dto: UpdateUserDto) {
+  async update(@Param('id') id: number, @Body() dto: UpdateUserDto) {
     const user = await this.usersService.update(id, dto);
     if (!user) throw new NotFoundException('User not found');
     return new SuccessResponseDto('User updated successfully', user);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {
     const user = await this.usersService.remove(id);
     if (!user) throw new NotFoundException('User not found');
     return new SuccessResponseDto('User deleted successfully', user);
