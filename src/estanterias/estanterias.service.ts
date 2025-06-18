@@ -36,7 +36,7 @@ export class EstanteriasService {
     }
   }
 
-  async findOne(id: string): Promise<Estanteria | null> {
+  async findOne(id: number): Promise<Estanteria | null> {
     try {
       return await this.userRepo.findOne({ where: { id } });
     } catch (err) {
@@ -44,7 +44,7 @@ export class EstanteriasService {
       return null;
     }
   }
-   async update(id: string, dto: UpdateEstanteriaDto): Promise<Estanteria | null> {
+   async update(id: number, dto: UpdateEstanteriaDto): Promise<Estanteria | null> {
     try {
       const user = await this.findOne(id);
       if (!user) return null;
@@ -57,7 +57,7 @@ export class EstanteriasService {
     }
   }
 
-  async remove(id: string): Promise<Estanteria | null> {
+  async remove(id: number): Promise<Estanteria | null> {
     try {
       const user = await this.findOne(id);
       if (!user) return null;
@@ -67,4 +67,5 @@ export class EstanteriasService {
       console.error('Error deleting user:', err);
       return null;
     }
+  }
 }

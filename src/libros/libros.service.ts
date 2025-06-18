@@ -36,7 +36,7 @@ export class LibrosService {
     }
   }
 
-  async findOne(id: string): Promise<Libro | null> {
+  async findOne(id: number): Promise<Libro | null> {
     try {
       return await this.userRepo.findOne({ where: { id } });
     } catch (err) {
@@ -45,16 +45,16 @@ export class LibrosService {
     }
   }
 
-  async findByUsername(username: string): Promise<Libro | null> {
+  async findByTitle(titulo: string): Promise<Libro | null> {
     try {
-      return await this.userRepo.findOne({ where: { username } });
+      return await this.userRepo.findOne({ where: { titulo } });
     } catch (err) {
-      console.error('Error finding user by username:', err);
+      console.error('Error finding user by titulo:', err);
       return null;
     }
   }
 
-  async update(id: string, dto: UpdateLibroDto): Promise<Libro | null> {
+  async update(id: number, dto: UpdateLibroDto): Promise<Libro | null> {
     try {
       const user = await this.findOne(id);
       if (!user) return null;
@@ -67,7 +67,7 @@ export class LibrosService {
     }
   }
 
-  async remove(id: string): Promise<Libro | null> {
+  async remove(id: number): Promise<Libro | null> {
     try {
       const user = await this.findOne(id);
       if (!user) return null;

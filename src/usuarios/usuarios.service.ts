@@ -23,7 +23,7 @@ export class UsuariosService {
     }
   }
 
-  async findAll(options: IPaginationOptions, isActive?: boolean): Promise<Pagination<User> | null> {
+  async findAll(options: IPaginationOptions, isActive?: boolean): Promise<Pagination<Usuario> | null> {
     try {
       const query = this.userRepo.createQueryBuilder('user');
       if (isActive !== undefined) {
@@ -36,7 +36,7 @@ export class UsuariosService {
     }
   }
 
-  async findOne(id: string): Promise<Usuario | null> {
+  async findOne(id: number): Promise<Usuario | null> {
     try {
       return await this.userRepo.findOne({ where: { id } });
     } catch (err) {
@@ -45,16 +45,16 @@ export class UsuariosService {
     }
   }
 
-  async findByUsername(username: string): Promise<Usuario | null> {
+  async findByNombre(nombre: string): Promise<Usuario | null> {
     try {
-      return await this.userRepo.findOne({ where: { username } });
+      return await this.userRepo.findOne({ where: { nombre } });
     } catch (err) {
       console.error('Error finding user by username:', err);
       return null;
     }
   }
 
-  async update(id: string, dto: UpdateUserDto): Promise<Usuario | null> {
+  async update(id: number, dto: UpdateUserDto): Promise<Usuario | null> {
     try {
       const user = await this.findOne(id);
       if (!user) return null;
@@ -67,7 +67,7 @@ export class UsuariosService {
     }
   }
 
-  async remove(id: string): Promise<Usuario | null> {
+  async remove(id: number): Promise<Usuario | null> {
     try {
       const user = await this.findOne(id);
       if (!user) return null;

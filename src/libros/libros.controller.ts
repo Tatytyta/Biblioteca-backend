@@ -37,21 +37,21 @@ export class LibrosController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: number) {
     const user = await this.usersService.findOne(id);
     if (!user) throw new NotFoundException('User not found');
     return new SuccessResponseDto('User retrieved successfully', user);
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() dto: UpdateLibroDto) {
+  async update(@Param('id') id: number, @Body() dto: UpdateLibroDto) {
     const user = await this.usersService.update(id, dto);
     if (!user) throw new NotFoundException('User not found');
     return new SuccessResponseDto('User updated successfully', user);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {
     const user = await this.usersService.remove(id);
     if (!user) throw new NotFoundException('User not found');
     return new SuccessResponseDto('User deleted successfully', user);
