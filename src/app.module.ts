@@ -9,12 +9,16 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ResenasLibrosModule } from './resenas-libros/resenas-libros.module';
+import { ActividadUsuariosModule } from './actividad-usuarios/actividad-usuarios.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    MongooseModule.forRoot(process.env.MONGO_URI || ''),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -44,6 +48,8 @@ import { AppService } from './app.service';
     LibrosModule,
     UsuariosModule,
     AuthModule,
+    ResenasLibrosModule,
+    ActividadUsuariosModule,
   ],
   controllers: [AppController],
   providers: [AppService],

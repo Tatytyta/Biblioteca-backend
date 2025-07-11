@@ -25,7 +25,7 @@ export class LibrosService {
 
   async findAll(options: IPaginationOptions, isActive?: boolean): Promise<Pagination<Libro> | null> {
     try {
-      const query = this.userRepo.createQueryBuilder('user');
+      const query = this.userRepo.createQueryBuilder('libro');
       if (isActive !== undefined) {
         query.where('user.isActive = :isActive', { isActive });
       }
