@@ -10,71 +10,68 @@ import { UpdateLibroDto } from './dto/update-libro.dto';
 export class LibrosService {
     constructor(
     @InjectRepository(Libro)
-    private readonly userRepo: Repository<Libro>,
+    private readonly libroRepository: Repository<Libro>,
   ) {}
 
   async create(dto: CreateLibroDto): Promise<Libro | null> {
     try {
-      const user = this.userRepo.create(dto);
-      return await this.userRepo.save(user);
+      const libro = this.libroRepository.create(dto);
+      return await this.libroRepository.save(libro);
     } catch (err) {
-      console.error('Error creating user:', err);
+      console.error('Error creating libro:', err);
       return null;
     }
   }
 
   async findAll(options: IPaginationOptions, isActive?: boolean): Promise<Pagination<Libro> | null> {
     try {
-      const query = this.userRepo.createQueryBuilder('libro');
-      if (isActive !== undefined) {
-        query.where('user.isActive = :isActive', { isActive });
-      }
+      const query = this.libroRepository.createQueryBuilder('libro');
       return await paginate<Libro>(query, options);
     } catch (err) {
-      console.error('Error retrieving users:', err);
+      console.error('Error retrieving libros:', err);
       return null;
     }
   }
 
   async findOne(id: number): Promise<Libro | null> {
     try {
-      return await this.userRepo.findOne({ where: { id } });
+      return await this.libroRepository.findOne({ where: { id } });
     } catch (err) {
-      console.error('Error finding user:', err);
+      console.error('Error finding libro:', err);
       return null;
     }
   }
 
   async findByTitle(titulo: string): Promise<Libro | null> {
     try {
-      return await this.userRepo.findOne({ where: { titulo } });
+      return await this.libroRepository.findOne({ where: { titulo } });
     } catch (err) {
-      console.error('Error finding user by titulo:', err);
+      console.error('Error finding libro by titulo:', err);
       return null;
     }
   }
 
   async update(id: number, dto: UpdateLibroDto): Promise<Libro | null> {
     try {
-      const user = await this.findOne(id);
-      if (!user) return null;
+      const libro = await this.findOne(id);
+      if (!libro) return null;
 
-      Object.assign(user, dto);
-      return await this.userRepo.save(user);
+      Object.assign(libro, dto);
+      return await this.libroRepository.save(libro);
     } catch (err) {
-      console.error('Error updating user:', err);
+      console.error('Error updating libro:', err);
       return null;
     }
   }
 
   async remove(id: number): Promise<Libro | null> {
     try {
-      const user = await this.findOne(id);
-      if (!user) return null;
+      const libro = await this.findOne(id);
+      if (!libro) return null;
 
-      return await this.userRepo.remove(user);
+      return await this.libroRepository.remove(libro);
     } catch (err) {
-      console.error('Error deleting user:', err);
+      console.error('Error deleting libro:', err);
       return null;
     }
   }
