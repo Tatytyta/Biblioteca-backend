@@ -3,12 +3,10 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const port = process.env.PORT ?? 3050;
-  app.enableCors();
+
+  const port = process.env.PORT || 3000; // 👈 ¡esto es obligatorio en Render!
   await app.listen(port);
-  console.log(`🚀 Servidor iniciado exitosamente en: http://localhost:${port}`);
+
+  console.log(`Servidor escuchando en el puerto ${port}`);
 }
-bootstrap().catch(error => {
-  console.error('Error al iniciar el servidor:', error);
-  process.exit(1);
-});
+bootstrap();
