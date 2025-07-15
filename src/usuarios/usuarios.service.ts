@@ -5,6 +5,7 @@ import { paginate, IPaginationOptions, Pagination } from 'nestjs-typeorm-paginat
 import { Usuario } from './usuario.entity';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUserDto } from './dto/update-usuario.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsuariosService {
@@ -15,7 +16,12 @@ export class UsuariosService {
 
   async create(dto: CreateUsuarioDto): Promise<Usuario | null> {
     try {
-      const user = this.userRepo.create(dto);
+      const hashedPassword = await bcrypt.hash(dto.password, 10);
+      const user = this.userRepo.create({
+        ...dto, 
+        password: hashedPassword,
+      });
+
       return await this.userRepo.save(user);
     } catch (err) {
       console.error('Error creating user:', err);
