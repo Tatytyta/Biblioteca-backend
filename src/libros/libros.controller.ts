@@ -7,7 +7,7 @@ import {
 import { LibrosService } from './libros.service';
 import { CreateLibroDto } from './dto/create-libro.dto';
 import { UpdateLibroDto } from './dto/update-libro.dto';
-import { SuccessResponseDto } from 'src/common/dto/response.dto';
+import { SuccessResponseDto } from '../common/dto/response.dto';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { Libro } from './libros.entity';
 

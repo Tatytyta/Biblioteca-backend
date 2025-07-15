@@ -7,7 +7,7 @@ import {
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUserDto } from './dto/update-usuario.dto';
-import { SuccessResponseDto } from 'src/common/dto/response.dto';
+import { SuccessResponseDto } from '../common/dto/response.dto';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { Usuario } from './usuario.entity';
 

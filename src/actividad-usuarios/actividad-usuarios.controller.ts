@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { ActividadUsuariosService } from './actividad-usuarios.service';
 import { RegistrarActividadDto } from './dto/registrar-actividad.dto';
-import { SuccessResponseDto } from 'src/common/dto/response.dto';
+import { SuccessResponseDto } from '../common/dto/response.dto';
 
 @Controller('actividad-usuarios')
 export class ActividadUsuariosController {

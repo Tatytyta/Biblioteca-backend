@@ -13,7 +13,7 @@ import {
 import { ResenasLibrosService } from './resenas-libros.service';
 import { CrearResenaDto } from './dto/crear-resena.dto';
 import { ActualizarResenaDto } from './dto/actualizar-resena.dto';
-import { SuccessResponseDto } from 'src/common/dto/response.dto';
+import { SuccessResponseDto } from '../common/dto/response.dto';
 
 @Controller('resenas-libros')
 export class ResenasLibrosController {

@@ -1,6 +1,6 @@
 import { Controller, Post, Get, Body, Query, BadRequestException,InternalServerErrorException } from '@nestjs/common';
 import { CreateEstanteriaDto } from './dto/create-estanterias.dto';
-import { SuccessResponseDto } from 'src/common/dto/response.dto';
+import { SuccessResponseDto } from '../common/dto/response.dto';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { Estanteria } from './estanterias.entity';
 import { EstanteriasService } from './estanterias.service';
