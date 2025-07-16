@@ -18,6 +18,7 @@ export class UsuariosController {
   @Post()
   async create(@Body() dto: CreateUsuarioDto) {
     const user = await this.usersService.create(dto);
+    console.log('Usuario creado:', user);
     return new SuccessResponseDto('User created successfully', user);
   }
 
